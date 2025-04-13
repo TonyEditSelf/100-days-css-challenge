@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>100 Days CSS Challenge</title>
+
+    <style>
+        :root {
+            --bg: #121212;
+            --text: #ffffff;
+            --card: #1e1e1e;
+            --accent: #4dd0e1;
+        }
+
+        body.light {
+            --bg: #f0f4f8;
+            --text: #222;
+            --card: #ffffff;
+            --accent: #007acc;
+        }
+
+        body {
+            margin: 0;
+            padding: 2rem;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            text-align: center;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .toggle-btn {
+            display: block;
+            margin: 0 auto 2rem;
+            background-color: var(--card);
+            color: var(--accent);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--card);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
+        .card a {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1rem;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        .preview-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 6px;
+            background-color: #000;
+        }
+
+        .preview-img,
+        .preview-vid {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 6px;
+        }
+
+        .preview-vid {
+            pointer-events: none;
+        }
+
+        .card:hover .preview-vid {
+            pointer-events: auto;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <h1>100 Days CSS Challenge</h1>
+    <p>Click on any project to view it live ✨</p>
+
+    <button class="toggle-btn" onclick="toggleTheme()">Toggle Dark/Light Mode</button>
+
+    <div class="grid" id="daysGrid"></div>
+
+    <script>
+        // Default dark mode
+        document.body.classList.remove('light');
+
+        function toggleTheme() {
+            document.body.classList.toggle('light');
+        }
+
+        const totalDays = 3; // 🔁 Update as you go
+        const dayTitles = {
+            1: "Animated Button",
+            2: "Glass Card",
+            3: "CSS Pulse Ring",
+        };
+
+        const daysGrid = document.getElementById('daysGrid');
+
+        for (let i = 1; i <= totalDays; i++) {
+            const dayNum = i.toString().padStart(2, '0');
+            const folder = `Day${dayNum}`;
+            const title = dayTitles[i] || `Day ${dayNum}`;
+
+            const card = document.createElement('div');
+            card.className = "card";
+
+            const imagePath = `${folder}/preview.png`;
+            const videoPath = `${folder}/preview.mp4`;
+
+            card.innerHTML = `
+          <div id="preview-${dayNum}">
+            <img src="${imagePath}" alt="Preview of Day ${dayNum}" class="preview-img" style="display: none;" />
+            <video class="preview-img" src="${videoPath}" muted autoplay loop playsinline style="display: none;"></video>
+          </div>
+          <a href="./${folder}/" target="_blank">Day ${dayNum} - ${title}</a>
+        `;
+
+            daysGrid.appendChild(card);
+
+            // Check if video exists
+            const video = card.querySelector('video');
+            const img = card.querySelector('img');
+
+            fetch(videoPath, { method: 'HEAD' })
+                .then((res) => {
+                    if (res.ok) {
+                        video.style.display = 'block';
+                    } else {
+                        return fetch(imagePath, { method: 'HEAD' });
+                    }
+                })
+                .then((res) => {
+                    if (res && res.ok) {
+                        img.style.display = 'block';
+                    }
+                })
+                .catch(() => {
+                    // No media exists
+                });
+        }
+    </script>
+
+</body>
+
+</html>
