@@ -1,0 +1,104 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    border-radius: 2px;
+    box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background: #fff;
+    color: #333;
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(45deg in oklab, #4446A3 15%, #4EC3C9);
+}
+
+.center {
+    position: relative;
+    /* position: absolute; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    /* border: 1px solid red; */
+}
+
+.one-one {
+    position: absolute;
+    height: 100px;
+    width: 20px;
+    background-color: white;
+    z-index: 5;
+    box-shadow: 5px 0 2px rgb(0, 0, 0, 0.1),
+        -1px 0 4px rgb(0, 0, 0, 0.1);
+    border-radius: 2px;
+
+}
+
+.one-two {
+    position: absolute;
+    top: 11.1px;
+    left: -26px;
+    height: 20px;
+    width: 40px;
+    background-color: white;
+    box-shadow: -2px 0 2px rgb(0, 0, 0, 0.1);
+    transform: rotate(-45deg);
+    border-radius: 2px;
+}
+
+.one-zero {
+    position: absolute;
+    top: 0;
+    left: 14px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 20px solid white;
+    box-shadow: 7px 0 2px rgb(0, 0, 0, 0.1);
+    z-index: 4;
+    transform: rotate(-45deg);
+}
+
+.two-zero {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 20px solid white;
+    box-shadow: 2px 0 2px rgb(0, 0, 0, 0.1);
+    z-index: 3;
+    transform: rotate(-45deg);
+}
+
+.days {
+    position: absolute;
+    font-family: 'Courier New', Courier;
+    font-size: 80px;
+    font-weight: bolder;
+    color: white;
+    top: 100px;
+}
+
+.challenge {
+    position: absolute;
+    font-family: 'Courier New', Courier;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    top: 180px;
+}
