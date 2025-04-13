@@ -90,6 +90,7 @@
             overflow: hidden;
             border-radius: 6px;
             background-color: #000;
+            margin-bottom: 0.5rem;
         }
 
         .preview-img,
@@ -97,12 +98,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
             border-radius: 6px;
+            display: none;
         }
+
 
         .preview-vid {
             pointer-events: none;
@@ -151,12 +150,15 @@
             const videoPath = `${folder}/preview.mp4`;
 
             card.innerHTML = `
-          <div id="preview-${dayNum}">
-            <img src="${imagePath}" alt="Preview of Day ${dayNum}" class="preview-img" style="display: none;" />
-            <video class="preview-img" src="${videoPath}" muted autoplay loop playsinline style="display: none;"></video>
-          </div>
-          <a href="./${folder}/" target="_blank">Day ${dayNum} - ${title}</a>
-        `;
+  <a href="./${folder}/" target="_blank">
+    <div class="preview-wrapper">
+      <video class="preview-vid" src="${videoPath}" muted autoplay loop playsinline></video>
+      <img src="${imagePath}" alt="Preview of Day ${dayNum}" class="preview-img" />
+    </div>
+    Day ${dayNum} - ${title}
+  </a>
+`;
+
 
             daysGrid.appendChild(card);
 
@@ -164,6 +166,7 @@
             const video = card.querySelector('video');
             const img = card.querySelector('img');
 
+            // Check if video exists
             fetch(videoPath, { method: 'HEAD' })
                 .then((res) => {
                     if (res.ok) {
